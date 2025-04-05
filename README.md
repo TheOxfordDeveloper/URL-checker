@@ -1,17 +1,40 @@
-This code was born from a csv file of ~30,000 URLs needing to be checked for data. Unfortunately, even if the URL does contain data, it still displays a valid web browser and displays the message "The Graded Stakes Profile you were searching for could not be found" (rather than the URL simply not working/loading as is usually the case when there is nothing displayed on a webpage - which would've been far easier to handle). 
+# URL Checker (Headless)
 
-The code iterates through each URL in my master URL csv file, looks for the error message "The Graded Stakes Profile you were searching for could not be found" in the webpage HTML, and then saves the outcome to the corresponding URL in a csv file, with "yes" to indicate there is data on the webpage (in which case we would investigate the URL further to identify the information we are looking for), or "no" to indicate there is no data on the webpage (i.e., the code detected the error message "The Graded Stakes Profile you were searching for could not be found" in the webpage HTML - in which case we discard this URL as it is of no use to us). 
+This script processes a CSV file containing approximately 30,000 URLs to identify which web pages contain relevant data. It is optimised for headless execution in cloud environments and is structured to avoid detection by bot-protection mechanisms.
+
+## Overview
+
+Many of the URLs point to pages that, even when valid, return a visible browser page with the message:
+
+> **"The Graded Stakes Profile you were searching for could not be found"**
+
+This message indicates that the page does not contain the data of interest, even though the page technically loads. The script checks each URL in the input CSV file, scans the page content for this specific error message, and records whether the page contains relevant data.
+
+- If the error message is found → the script records `"no"` in the output CSV.
+- If the message is not found → the script records `"yes"`, indicating the page may contain useful data for further inspection.
+
+## Files
+
+- `Equibase_URLS.csv`: Master input file containing ~30,000 URLs to be checked.
+- `generate_cookies.py`: Script to generate cookies from a browser session.
+- `test_cookies.py`: Script to test whether cookies can be used successfully to bypass bot detection.
+- `url_checker_HEADLESS.py`: Main script that performs headless browsing, checks each URL for the error message, and saves the result as `"yes"` or `"no"`.
+
+## Features
+
+- Headless Chrome browsing with Selenium.
+- Randomised user agents to reduce detection likelihood.
+- Support for injecting session cookies (`cookies.pkl`).
+- CSV splitting and batch processing to handle large volumes efficiently.
+- Random delays between batches to simulate human-like browsing.
+- Manual captcha mode if required.
 
 
+## Output
 
-The files: 
-Equibase_URLS.csv --> the master csv file containing approx. 30,000 URLs i'd like to check for data 
+- For each URL, the output CSV will contain:
+  - The original URL.
+  - A `"yes"` or `"no"` label indicating whether relevant data is present on the page.
 
-generate_cookies.py --> generates cookies from a user session 
-
-test_cookies.py --> tests these cookies to ensure the URL checker can use these cookies to pass as a human (rather than detected by the webpages security as a bot and block us) 
-
-url_checker_HEADLESS.py --> iterates through the 30k URL's and returns "yes/no" in the csv file for further analysis. Uses headless so that it can run on the cloud uninterrupted, as it takes several hours for the code to iterate through all 30,000 URLs. 
-
-The result: 
+Example results:  
 ![image](https://github.com/user-attachments/assets/06ebc592-17df-4e43-8382-d783e558d269)
