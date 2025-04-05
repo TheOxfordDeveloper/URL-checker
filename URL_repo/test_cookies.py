@@ -37,8 +37,8 @@ def test_cookies():
     print("Starting cookie testing process...")
     
     # Try loading cookies from both files
-    cookies_consent = load_cookies('/root/scraping_project/cookies_after_consent.pkl')
-    cookies_pages = load_cookies('/root/scraping_project/cookies_after_visiting_pages.pkl')
+    cookies_consent = load_cookies('cookies_after_consent.pkl')
+    cookies_pages = load_cookies('cookies_after_visiting_pages.pkl')
     
     # Merge the two cookie lists
     all_cookies = cookies_consent + cookies_pages
