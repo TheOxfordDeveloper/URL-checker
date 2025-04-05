@@ -11,7 +11,7 @@ generate_cookies.py --> generates cookies from a user session
 
 test_cookies.py --> tests these cookies to ensure the URL checker can use these cookies to pass as a human (rather than detected by the webpages security as a bot and block us) 
 
-url_checker_HEADLESS.py --> iterates through the 30k URL's and returns "yes/no" in the csv file for further analysis. 
+url_checker_HEADLESS.py --> iterates through the 30k URL's and returns "yes/no" in the csv file for further analysis. Uses headless so that it can run on the cloud uninterrupted, as it takes several hours for the code to iterate through all 30,000 URLs. 
 
 The result: 
 ![image](https://github.com/user-attachments/assets/06ebc592-17df-4e43-8382-d783e558d269)
