@@ -144,7 +144,7 @@ def save_cookies(driver, filename='cookies.pkl'):
 
     pass 
 
-def load_cookies(driver, filename='/root/scraping_project/cookies.pkl'):
+def load_cookies(driver, filename='cookies.pkl'):
     """Load cookies from file into browser session"""
     if os.path.exists(filename):
         with open(filename, 'rb') as file:
@@ -227,7 +227,7 @@ def login_and_setup_session(driver, base_url="https://www.equibase.com"):
     """
     try:
         # Check if cookies file exists and load it
-        if os.path.exists('/root/scraping_project/cookies.pkl'):
+        if os.path.exists('cookies.pkl'):
             # First navigate to the base domain before loading cookies
             driver.get(base_url)
             time.sleep(3)
@@ -549,8 +549,8 @@ def process_csv(input_file, output_file, batch_size=30, debug=True, start_from=0
 
 if __name__ == "__main__":
     # Set file paths
-    input_file = "/root/scraping_project/Equibase_URLs_csv.csv"
-    output_file = "/root/scraping_project/CLOUD_results.csv"
+    input_file = "Equibase_URLs_csv.csv"
+    output_file = "CLOUD_results.csv"
     batch_size = 30  # Increased for faster processing
     
     # Modified behavior for Digital Ocean operation - always choose option 2
